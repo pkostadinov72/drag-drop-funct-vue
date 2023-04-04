@@ -15,24 +15,18 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref } from "vue";
 
-export default {
-  setup() {
-    const isDragging = ref(false);
+const isDragging = ref(false);
 
-    function handleDrop(event) {
-      event.preventDefault();
-      const files = Array.from(event.dataTransfer.files);
-      // do something with the dropped files
-      console.log(files);
-      isDragging.value = false;
-    }
-
-    return { isDragging, handleDrop };
-  },
-};
+function handleDrop(event: any) {
+  event.preventDefault();
+  const files = Array.from(event.dataTransfer.files);
+  // do something with the dropped files
+  console.log(files);
+  isDragging.value = false;
+}
 </script>
 
 <style scoped>
