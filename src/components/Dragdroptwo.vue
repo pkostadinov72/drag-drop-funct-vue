@@ -1,51 +1,47 @@
 <template>
-  <div class="input-div" @drop.prevent="handleDrop">
-    <input type="file" multiple @change="handleFileSelect" />
-    <output v-html="imagesArray"></output>
+  <div
+    class="dropzone"
+    @dragover.prevent
+    @dragenter.prevent="isDragging = true"
+    @dragleave.prevent="isDragging = false"
+    @drop.prevent="handleDrop"
+  >
+    <div v-if="!isDragging">
+      <p>Drag and drop files here</p>
+    </div>
+    <div v-else>
+      <p>Drop files here</p>
+    </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script>
 import { ref } from "vue";
 
-const imagesArray = ref<File[]>([]);
-const images = ref("");
+export default {
+  setup() {
+    const isDragging = ref(false);
 
-function handleFileSelect(event: any) {
-  const files = (event.target as HTMLInputElement).files;
-  if (files) {
-    for (let i = 0; i < files.length; i++) {
-      imagesArray.value.push(files[i]);
+    function handleDrop(event) {
+      event.preventDefault();
+      const files = Array.from(event.dataTransfer.files);
+      // do something with the dropped files
+      console.log(files);
+      isDragging.value = false;
     }
-    displayImages();
-  }
-}
 
-function handleDrop(event: DragEvent) {
-  event.preventDefault();
-  const files = event.dataTransfer?.files;
-  if (files) {
-    for (let i = 0; i < files.length; i++) {
-      if (!files[i].type.match("image")) continue;
-
-      if (imagesArray.value.every((image) => image.name !== files[i].name)) {
-        imagesArray.value.push(files[i]);
-      }
-    }
-    displayImages();
-  }
-}
-
-function displayImages() {
-  let images = "";
-  imagesArray.value.forEach((image, index) => {
-    images += `
-      <div class="image">
-        <img src="${URL.createObjectURL(image)}" alt="image">
-        <span @click="() => deleteImage(${index})">&times;</span>
-      </div>
-    `;
-  });
-  images = images; // Assign the updated HTML string to the `images` variable
-}
+    return { isDragging, handleDrop };
+  },
+};
 </script>
+
+<style scoped>
+.dropzone {
+  width: 300px;
+  height: 200px;
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
