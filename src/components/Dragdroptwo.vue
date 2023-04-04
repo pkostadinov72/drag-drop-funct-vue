@@ -2,30 +2,25 @@
   <div
     class="dropzone"
     @dragover.prevent
-    @dragenter.prevent="isDragging = true"
-    @dragleave.prevent="isDragging = false"
+    @dragenter.prevent
+    @dragleave.prevent
     @drop.prevent="handleDrop"
   >
-    <div v-if="!isDragging">
+    <div>
       <p>Drag and drop files here</p>
     </div>
-    <div v-else>
+    <div>
       <p>Drop files here</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-
-const isDragging = ref(false);
-
 function handleDrop(event: any) {
   event.preventDefault();
   const files = Array.from(event.dataTransfer.files);
   // do something with the dropped files
   console.log(files);
-  isDragging.value = false;
 }
 </script>
 
