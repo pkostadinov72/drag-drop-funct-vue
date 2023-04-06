@@ -1,6 +1,7 @@
 # dragdrop-test
 
-This template should help get you started developing with Vue 3 in Vite.
+Creating Drop zone for Files with mouse drag. - @/components/Dragdroptwo, NO UPLOAD.
+
 
 ## Recommended IDE Setup
 
