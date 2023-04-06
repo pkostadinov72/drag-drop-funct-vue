@@ -1,6 +1,6 @@
 # dragdrop-test
 
-Creating Drop zone for Files with mouse drag. - @/components/Dragdroptwo, NO UPLOAD.
+Creating Drop zone for Files with mouse drag. - @/src/components/Dragdroptwo, NO UPLOAD.
 
 
 ## Recommended IDE Setup
