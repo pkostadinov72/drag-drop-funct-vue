@@ -9,9 +9,6 @@
     <div>
       <p>Drag and drop files here</p>
     </div>
-    <div>
-      <p>Drop files here</p>
-    </div>
   </div>
 </template>
 
